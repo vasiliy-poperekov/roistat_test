@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\RedicrectController;
+use App\Http\Controllers\LeadFormController;
+use App\Http\Controllers\SaveUserController;
+use App\Http\Controllers\SendLeadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [RedicrectController::class, 'redirectToAuth']);
+
+Route::get('/auth', [SaveUserController::class, 'save']);
+
+Route::post('/send', [SendLeadController::class, 'sendLead']);
+
+Route::get('/form', [LeadFormController::class, 'showForm']);
